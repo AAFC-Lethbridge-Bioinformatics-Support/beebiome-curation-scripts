@@ -7,18 +7,36 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import numpy as np
 
+def makeTaxonomyDict(root):
+    tax_dict = {}
+    for taxon in root.findall('./'):
+        temp_taxid = 'empty'
+        for field in taxon:
+            if field.tag == 'TaxId':
+                temp_taxid = field.text
+            elif field.tag == 'ScientificName':
+                tax_dict[field.text] = temp_taxid
+            else:
+                continue
+    return tax_dict
 
-def parseXML(xmlfile):
+# Function to print sum
+def checkApoidea(dict, key):
+    if key in dict:
+        return dict[key]
+    else:
+        return "Not in Apoidea"
+
+def parseXML(xmlfile, taxonomy_dict):
     #parses the read-in xmlfile and populates a list of dicts
     tree = ET.parse(xmlfile)
-    tax_tree = ET.parse('/home/lilia/beebiome/beebiome-update/data/Apoidea/Apoidea_taxonomy.xml')
 
     root = tree.getroot()
-    tax_root = tax_tree.getroot()
+
     # print(root) ----> BioSampleSet at some memory location
     # you can make a list to like collect stuff
     data = []
-    number_of_samples = len(tax_root)
+    number_of_samples = len(root)
     for sample_index, item in enumerate(root.findall('./')):
         biosample = {}
         # print(item) ---> BioSample at some memory location
@@ -27,15 +45,10 @@ def parseXML(xmlfile):
         # you can also use dict = item.attrib to get a dictionary of all the xml 'attributes'
         #print(item.get("access"))
         biosample['access'] = item.get("access")
-        #print(item.get("publication_date"))
         biosample['pub_date'] = item.get("publication_date")
-        #print(item.get("last_update"))
         biosample['last_update'] = item.get("last_update")
-        #print(item.get("submission_date"))
         biosample['sub_date'] = item.get("submission_date")
-        #print(item.get("id"))
         biosample['id'] = item.get("id")
-        #print(item.get("accession"))
         biosample['accession'] = item.get("accession")
 
         for child in item:
@@ -48,23 +61,7 @@ def parseXML(xmlfile):
                     if attribute.get("attribute_name") == 'host':
                         # new column host with the host name
                         biosample['host'] = attribute.text
-                        for taxon in tax_root.findall('./'):
-                            #print(taxon.tag)
-                            temp_taxid = 'temp meaningless value'
-                            for field in taxon:
-                                #print(field.tag)
-                                if field.tag == 'TaxId':
-                                    temp_taxid = field.text
-                                    #print(temp_taxid)
-                                if field.tag == 'ScientificName':
-                                    #print(attribute.text.lower())
-                                    if field.text.lower() == attribute.text.lower():
-                                        #print(temp_taxid + ' ' + field.text)
-                                        biosample['taxid'] = temp_taxid
-                                        #print(temp_taxid)
-                                        break
-                            else:
-                                biosample['taxid'] = "Not in Apoidea"
+                        biosample['taxid'] = checkApoidea(taxonomy_dict, attribute.text)
                         hosted = True
                 if hosted == False:
                     # new column host with N/A as the host
@@ -100,10 +97,14 @@ def savetoCSV(data, filename):
         writer.writerows(data)
 
 def main(): 
-    #compiled_data = [] 
+    apoidea_taxonomy_tree = ET.parse('/home/lilia/beebiome/beebiome-update/data/Apoidea/Apoidea_taxonomy.xml')
+    apoidea_taxonomy_root = apoidea_taxonomy_tree.getroot()
+    apoidea_taxonomy_dict = makeTaxonomyDict(apoidea_taxonomy_root)
+    print(apoidea_taxonomy_dict)
+    print(checkApoidea(apoidea_taxonomy_dict, "Sudila"))
     for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea/'):
         if f_name.startswith('Apoidea_biosample.'):
-            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name)
+            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name, apoidea_taxonomy_dict)
             savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml-parse-output/' + f_name + '.csv')
             df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml-parse-output/'+ f_name + '.csv')
             new_df = df.reindex(columns=['host', 'taxid', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 
