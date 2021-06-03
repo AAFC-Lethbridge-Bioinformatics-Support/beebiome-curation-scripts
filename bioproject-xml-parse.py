@@ -61,15 +61,16 @@ def savetoCSV(data, filename):
 
 def main(): 
     beta_data = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/old-site-data.csv')
-    for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea(copy)/'):
-        if f_name.startswith('Apoidea_bioproject.') and (not (f_name.startswith('Apoidea_bioproject.12') 
-        or f_name.startswith('Apoidea_bioproject.2'))):
+    for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea/'):
+        #and (not (f_name.startswith('Apoidea_bioproject.12') or f_name.startswith('Apoidea_bioproject.2')))
+        if f_name.startswith('Apoidea_bioproject.'):
             print(f_name + '.csv is processing...')
-            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea(copy)/' + f_name, beta_data)
-            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/results (march)/' + f_name + '.csv')    
-            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/results (march)/'+ f_name + '.csv')
+            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name, beta_data)
+            f_name = f_name.replace('.', '_')
+            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run31May2021/' + f_name + '.csv')    
+            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run31May2021/'+ f_name + '.csv')
             new_df = df.reindex(columns=['project_accession', 'tax_id', 'pmid', 'in_beta', 'uid', 'last_update', 'submission_id', 'submitted', 'project_xml'])
-            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/results (march)/'+ f_name + '.csv', index=False)        
+            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run31May2021/'+ f_name + '.csv', index=False)        
 
 if __name__ == "__main__":
   

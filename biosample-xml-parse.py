@@ -1,6 +1,8 @@
 import csv
+from typing import TYPE_CHECKING
 import xmltodict
 import os
+import re
 import requests
 from Bio import Entrez
 import xml.etree.ElementTree as ET
@@ -27,7 +29,7 @@ def checkApoidea(dict, key):
     else:
         return "Not in Apoidea"
 
-def parseXML(xmlfile, taxonomy_dict, beta_data):
+def parseXML(xmlfile, taxonomy_dict, beta_data, auto_no):
     #parses the read-in xmlfile and populates a list of dicts
     tree = ET.parse(xmlfile)
 
@@ -51,9 +53,12 @@ def parseXML(xmlfile, taxonomy_dict, beta_data):
         biosample['id'] = item.get("id")
         biosample['accession'] = item.get("accession")
         if biosample['accession'] in beta_data.loc[:, "BioSample acc"].values:
+            #load if in xml return autoNo
             biosample['in_beta'] = 'Yes'
+            biosample['load'] = 'inBeta'
         else:
             biosample['in_beta'] = 'No'
+            biosample['load'] = ''
 
         for child in item:
             # print(child) ---> for ex Element 'Attributes'
@@ -65,6 +70,8 @@ def parseXML(xmlfile, taxonomy_dict, beta_data):
                     if attribute.get("attribute_name") == 'host':
                         # new column host with the host name
                         biosample['host'] = attribute.text
+                        if str(attribute.text) == 'NA':
+                            biosample['host'] = 'not applicable'
                         biosample['taxid'] = checkApoidea(taxonomy_dict, attribute.text)
                         hosted = True
                 if hosted == False:
@@ -74,53 +81,71 @@ def parseXML(xmlfile, taxonomy_dict, beta_data):
                 # then all attributes are turned into xml text in utf-8
                 #biosample['attributes'] = ET.tostring(child).decode('utf-8')
                 biosample['attributes'] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
+            elif child.tag == 'Ids':
+                for id in child:
+                    if id.get("db") == 'SRA':
+                        biosample['has_sra'] = id.text
+                        break
+                else:
+                    biosample['has_sra'] = 'no sra'
+                biosample[child.tag.lower()] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
+
+            elif child.tag == 'Links':
+                for link in child:
+                    if link.get("target") == 'bioproject':
+                        biosample['has_proj'] = link.get("label") 
+                        break
+                else:
+                    biosample['has_proj'] = 'no bioproject'
+                biosample[child.tag.lower()] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
             else:
                 # then all other tags are turned into xml test in utf-8
                 #biosample[child.tag.lower()] = ET.tostring(child).decode('utf-8')
                 biosample[child.tag.lower()] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
+        if re.match(auto_no, biosample['host'].casefold()):
+            biosample['load'] = 'autoNo'
+            #print("debug")
         data.append(biosample)
         #percent = (sample_index/number_of_samples * 100) 
         #print('Done ' + str(sample_index + 1) + '/' + str(number_of_samples) + ' samples or ' + str(percent) + '% of the set.')
     return data
 
 def savetoCSV(data, filename):
-  
     # specifying the fields for csv file
-    fields = ['taxid', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 'in_beta', 'ids', 'description', 'owner', 'models', 'package', 'host', 'attributes', 'links', 'status']
-  
+    fields = ['taxid', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 'in_beta', 'load', 'has_sra', 'has_proj', 'ids', 'description', 'owner', 'models', 'package', 'host', 'attributes', 'links', 'status']
     # writing to csv file
     with open(filename, 'w') as csvfile:
-  
         # creating a csv dict writer object
         writer = csv.DictWriter(csvfile, fieldnames = fields)
-  
         # writing headers (field names)
         writer.writeheader()
-  
         # writing data rows
         writer.writerows(data)
 
 def main(): 
-    apoidea_taxonomy_tree = ET.parse('/home/lilia/beebiome/beebiome-update/data/Apoidea(copy)/Apoidea_taxonomy.xml')
+    apoidea_taxonomy_tree = ET.parse('/home/lilia/beebiome/beebiome-update/data/Apoidea/Apoidea_taxonomy.xml')
     apoidea_taxonomy_root = apoidea_taxonomy_tree.getroot()
     apoidea_taxonomy_dict = makeTaxonomyDict(apoidea_taxonomy_root)
     #print(apoidea_taxonomy_dict)
     #print(checkApoidea(apoidea_taxonomy_dict, "Sudila"))
     beta_data = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/old-site-data.csv')
-    for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea(copy)/'):
-        if (f_name.startswith('Apoidea_biosample.') and (not f_name.startswith('Apoidea_biosample.2.'))):
+    auto_no = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/auto-no.csv')
+    auto_no = [str(x) for x in auto_no['autoNo if host in'].tolist()]
+    auto_no = [x.casefold() for x in auto_no]
+    auto_no = "(" + ")|(".join(auto_no) + ")"
+    print(auto_no)
+    for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea/'):
+        #and (not f_name.startswith('Apoidea_biosample.2.'))
+        if (f_name.startswith('Apoidea_biosample.')):
             print(f_name + '.csv is being processed...')
-            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea(copy)/' + f_name, apoidea_taxonomy_dict, beta_data)
-            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/results (march)/' + f_name + '.csv')
-            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/results (march)/'+ f_name + '.csv')
-            new_df = df.reindex(columns=['host', 'taxid', 'in_beta', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 
+            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name, apoidea_taxonomy_dict, beta_data, auto_no)
+            f_name = f_name.replace('.', '_')
+            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/' + f_name + '.csv')
+            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/'+ f_name + '.csv')
+            new_df = df.reindex(columns=['host', 'taxid', 'in_beta', 'load', 'has_sra', 'has_proj', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 
             'ids', 'description', 'owner', 'models', 'package', 'attributes', 'links', 'status'])
-            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/results (march)/'+ f_name + '.csv', index=False)
-            #compiled_data.extend(parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name))
-    #print(compiled_data)
-    #savetoCSV(compiled_data, 'test.csv')
+            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/'+ f_name + '.csv', index=False)
 
 if __name__ == "__main__":
-  
     # calling main function
     main()
