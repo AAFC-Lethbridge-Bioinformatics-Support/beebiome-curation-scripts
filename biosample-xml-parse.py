@@ -128,7 +128,7 @@ def main():
     apoidea_taxonomy_dict = makeTaxonomyDict(apoidea_taxonomy_root)
     #print(apoidea_taxonomy_dict)
     #print(checkApoidea(apoidea_taxonomy_dict, "Sudila"))
-    beta_data = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/old-site-data.csv')
+    beta_data = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/in-beta.csv')
     auto_no = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/auto-no.csv')
     auto_no = [str(x) for x in auto_no['autoNo if host in'].tolist()]
     auto_no = [x.casefold() for x in auto_no]
@@ -140,11 +140,11 @@ def main():
             print(f_name + '.csv is being processed...')
             data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name, apoidea_taxonomy_dict, beta_data, auto_no)
             f_name = f_name.replace('.', '_')
-            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/' + f_name + '.csv')
-            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/'+ f_name + '.csv')
+            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run4June2021/' + f_name + '.csv')
+            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run4June2021/'+ f_name + '.csv')
             new_df = df.reindex(columns=['host', 'taxid', 'in_beta', 'load', 'has_sra', 'has_proj', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 
             'ids', 'description', 'owner', 'models', 'package', 'attributes', 'links', 'status'])
-            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run3June2021/'+ f_name + '.csv', index=False)
+            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run4June2021/'+ f_name + '.csv', index=False)
 
 if __name__ == "__main__":
     # calling main function
