@@ -1,103 +1,84 @@
-﻿taxid,host,ScientificName
-28641,Bombus,Bombus
-44477,Apis mellifera mellifera,Apis mellifera mellifera
-178017,Augochlorella sp.,Augochlorella
-,Melipona,
-,Western honey bee7460,
-,Dialictus,
-,Apis mellifera cerana,
-44477,Apis mellifera,Apis mellifera mellifera
-,Apis mellifera ligustica,
-44477,honey bee (Apis mellifera),Apis mellifera mellifera
-,Megachile sp. (leafcutter bee),
-,Ceratina,
-,Honey bee 12,
-,Honey bee 11,
-,Honey bee 10,
-,Honey bee 9,
-,Honey bee 8,
-,Honey bee 7,
-,Honey bee 6,
-,Honey bee 5,
-,Honey bee 4,
-,Honey bee 3,
-,Honey bee 2,
-,Honey bee 1,
-,Apis mellifera L.,
-,Bee3,
-,Bee2,
-,Bee1,
-,Apis mellifera (honeybee),
-,Megachile sp. (policaris),
-,Megachile sp.,
-,Osmia,
-,Trigona silvestriana or Scaptotrigona subobscuripennis?,
-,Megachile rotundata,
-,solitary bees,
-,Nomia,
-,Osmia sp.,
-,Megachile rotundata,
-,Lasioglossum,
-,Lasioglossum leviense,
-,Lasioglossum viridatum,
-,Lasioglossum leviense,
-,Lasioglossum apopkense,
-,Megachile sp. (leafcutter bee),
-,Augochlorella sp.,
-,Megachile sp. (policaris),
-,Honeybee,
-7460?,Apis mellifera,
-,Apis cerana (honeybee),
-7461?,Apis mellifera cerana,
-44477?,Apis mellifera mellifera,
-,Apis mellifera,
-7469?,Apis mellifera ligustica,
-,bee,
-,Honeybee,
-156367 ?,Triepeolus sp.,
-,honey bee (Apis mellifera),
-,Honey bee 24,
-,Honey bee 23,
-,Honey bee 22,
-,Honey bee 21,
-,Honey bee 20,
-,Honey bee 19,
-,Honey bee 18,
-,Honey bee 17,
-,Honey bee 16,
-,Honey bee 15,
-,Honey bee 14,
-,Honey bee 13,
-,Honey bee 12,
-,Honey bee 11,
-,Honey bee 10,
-,Honey bee 9,
-,Honey bee 8,
-,Honey bee 7,
-,Honey bee 6,
-,Honey bee 5,
-,Honey bee 4,
-,Honey bee 3,
-,Honey bee 2,
-,Honey bee 1,
-,Apis mellifera,
-,Apis mellifera (honeybee),
-,apis malifera,
-,Mallotus japonicus,
-,Apis mellifera,
-,honey bee,
-,Trigona sp.,
-,Megachile rotundata,
-88467?,Lasioglossum,
-,Melipona sp.,
-,queen bee 3,
-,queen bee 2,
-,queen bee 1,
-7460?,Western honey bee,
-,on Jacksonia sp.,
-,yellow faced bee,
-,Bee,
-,Apis mellifera (Western honey bee),
-,honey bee (Apis mellifera),
-,Megachile sp. (leafcutter bee),
-,Osmia sp. (mason bee),
+host,processingScript,taxid,scientificName,genera
+Agapostemon sp.,Found inexact match,88590,Agapostemon,genus
+Anthophora sp.,Found inexact match,60896,Anthophora,genus
+Apis mellifera,7460,7460,Apis mellifera,species
+Apis mellifera (honeybee),Found inexact match,7460,Apis mellifera,species
+Apis mellifera cerana,7461,7461,Apis cerana,species
+Apis mellifera mellifera,44477,44477,Apis mellifera mellifera,subspecies
+Augochlorella sp.,Found inexact match,178017,Augochlorella,genus
+Bee1,Not in Apoidea,7460,Apis mellifera,species
+Bee2,Not in Apoidea,7460,Apis mellifera,species
+Bee3,Not in Apoidea,7460,Apis mellifera,species
+Bombus,28641,28641,Bombus,genus
+carpenter bee 1,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 10,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 11,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 12,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 13,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 14,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 15,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 16,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 17,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 18,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 2,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 3,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 4,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 5,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 6,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 7,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 8,Found inexact match,78170,Xylocopinae,subfamily
+carpenter bee 9,Found inexact match,78170,Xylocopinae,subfamily
+Ceratina,78173,78173,Ceratina,genus
+Dialictus sp.,Found inexact match,88475,Dialictus,subgenus
+Halictus,77574,77574,Halictus,genus
+honey bee,7460,7460,Apis mellifera,species
+honey bee (Apis mellifera),Found inexact match,7460,Apis mellifera,species
+Honey bee 1,Found inexact match,7460,Apis mellifera,species
+Honey bee 10,Found inexact match,7460,Apis mellifera,species
+Honey bee 11,Found inexact match,7460,Apis mellifera,species
+Honey bee 12,Found inexact match,7460,Apis mellifera,species
+Honey bee 13,Found inexact match,7460,Apis mellifera,species
+Honey bee 14,Found inexact match,7460,Apis mellifera,species
+Honey bee 15,Found inexact match,7460,Apis mellifera,species
+Honey bee 16,Found inexact match,7460,Apis mellifera,species
+Honey bee 17,Found inexact match,7460,Apis mellifera,species
+Honey bee 18,Found inexact match,7460,Apis mellifera,species
+Honey bee 19,Found inexact match,7460,Apis mellifera,species
+Honey bee 2,Found inexact match,7460,Apis mellifera,species
+Honey bee 20,Found inexact match,7460,Apis mellifera,species
+Honey bee 21,Found inexact match,7460,Apis mellifera,species
+Honey bee 22,Found inexact match,7460,Apis mellifera,species
+Honey bee 23,Found inexact match,7460,Apis mellifera,species
+Honey bee 24,Found inexact match,7460,Apis mellifera,species
+Honey bee 3,Found inexact match,7460,Apis mellifera,species
+Honey bee 4,Found inexact match,7460,Apis mellifera,species
+Honey bee 5,Found inexact match,7460,Apis mellifera,species
+Honey bee 6,Found inexact match,7460,Apis mellifera,species
+Honey bee 7,Found inexact match,7460,Apis mellifera,species
+Honey bee 8,Found inexact match,7460,Apis mellifera,species
+Honey bee 9,Found inexact match,7460,Apis mellifera,species
+honey bee colony,Found inexact match,7460,Apis mellifera,species
+Lasioglossum,88467,88467,Lasioglossum,genus
+Lasioglossum apopkense,Found inexact match,,?,
+Lasioglossum leviense,Found inexact match,,?,
+Lasioglossum viridatum,Found inexact match,,?,
+Lithurgus sp. (gibbosus),Found inexact match,,?,
+Lithurgus sp. (littoralis),Found inexact match,,?,
+Megachile rotundata,143995,143995,Megachile rotundata,species
+Megachile sp.,Found inexact match,132116,Megachile,genus
+Megachile sp. (leafcutter bee),Found inexact match,124286,Megachilidae,family
+Megachile sp. (policaris),Found inexact match,1732052,Megachile policaris,species
+Melipona sp.,Found inexact match,28651,Melipona,genus
+Nomia,178049,178049,Nomia,genus
+Osmia sp.,Found inexact match,124287,Osmia,genus
+Osmia sp. (mason bee),Found inexact match,124287,Osmia,genus
+queen bee 1,Found inexact match,7460,Apis mellifera,species
+queen bee 2,Found inexact match,7460,Apis mellifera,species
+queen bee 3,Found inexact match,7460,Apis mellifera,species
+solitary bees,Found inexact match,7460,Apis mellifera,species
+Triepeolus sp.,Found inexact match,156367,Triepeolus,genus
+Trigona silvestriana or Scaptotrigona subobscuripennis?,Found inexact match,478163,Trigona silvestriana,species
+Trigona sp.,Found inexact match,28657,Trigona,genus
+Western honey bee,7460,7460,Apis mellifera,species
+Xylocopa,7476,7476,Xylocopa,genus
+yellow faced bee,Found inexact match,7460,Apis mellifera,species
