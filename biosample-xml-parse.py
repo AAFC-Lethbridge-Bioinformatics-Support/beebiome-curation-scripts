@@ -59,10 +59,10 @@ def makeTaxonomyDict(root, genera_list):
                     elif other_name.tag in ['Synonym', 'Includes', 'GenbankCommonName', 'CommonName',
                         'EquivalentName', 'GenbankSynonym', 'BlastName']:
                         tax_dict[other_name.text] = temp_taxid
-                    else:
-                        print("THERE IS ANOTHER TYPE OF NAME!!!!")
-                        print("SEE:" + other_name.tag + " OF " + str(temp_taxid) + " TAXID AND #" + str(taxon_index) + " TAXON")
-                        exit()
+                   # else:
+                    #    print("THERE IS ANOTHER TYPE OF NAME!!!!")
+                     #   print("SEE:" + other_name.tag + " OF " + str(temp_taxid) + " TAXID AND #" + str(taxon_index) + " TAXON")
+                      #  exit()
             else:
                 continue
     return tax_dict
@@ -216,7 +216,7 @@ def checkApoidea(taxonomy_xml_dict, key, host_subs, genera_list):
                             break
 
             string_to_return = str('Host "' + key + '" was matched to "' + max_similarity_key + '" ' + taxonomy_xml_dict[max_similarity_key])
-            #print(string_to_return)
+            print(string_to_return)
             host_subs[key] = string_to_return
             return "Found inexact match"
 
@@ -269,11 +269,16 @@ def parseXML(xmlfile, taxonomy_dict, beta_data, auto_no, host_subs, genera_list)
                         else:
                             #biosample['load'] stays equal to ''
                             biosample['taxid'] = checkApoidea(taxonomy_dict, attribute.text, host_subs, genera_list)
+
+                            #LM 03Dec2021, set biosample to autoNo if host is Not in Apoidea
+                            if biosample['taxid'] == 'Not in Apoidea':
+                                biosample['load'] = 'autoNo'
                         hosted = True
                 if hosted == False:
                     # new column host with N/A as the host
-                    biosample['host'] = "Not avaliable"
-                    biosample['taxid'] = "Not avaliable"
+                    biosample['host'] = "Not available"
+                    biosample['taxid'] = "Not available"
+                    biosample['load'] = 'autoNo' #LM 03Dec2021, set biosample to autoNo
                     #biosample['load'] stays equal to ''
                 # then all attributes are turned into xml text in utf-8
                 #biosample['attributes'] = ET.tostring(child).decode('utf-8')
@@ -285,6 +290,8 @@ def parseXML(xmlfile, taxonomy_dict, beta_data, auto_no, host_subs, genera_list)
                         break
                 else:
                     biosample['has_sra'] = 'no sra'
+                    if biosample['load'] == '':
+                        biosample['load'] = 'autoNo'  #LM: might be yes on NCBI, check for a fix latter
                 biosample[child.tag.lower()] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
 
             elif child.tag == 'Links':
@@ -300,8 +307,9 @@ def parseXML(xmlfile, taxonomy_dict, beta_data, auto_no, host_subs, genera_list)
                 #biosample[child.tag.lower()] = ET.tostring(child).decode('utf-8')
                 biosample[child.tag.lower()] = xmltodict.parse(ET.tostring(child).decode('utf-8'))
         data.append(biosample)
+        #print(sample_index)
         #percent = (sample_index/number_of_samples * 100) 
-        #print('Done ' + str(sample_index + 1) + '/' + str(number_of_samples) + ' samples or ' + str(percent) + '% of the set.')
+        print('Done ' + str(sample_index + 1) + '/' + str(number_of_samples) + ' samples') # or ' + str(percent) + '% of the set.')
     return data
 
 def savetoCSV(data, filename):
@@ -316,32 +324,55 @@ def savetoCSV(data, filename):
         # writing data rows
         writer.writerows(data)
 
-def main(): 
-    apoidea_taxonomy_tree = ET.parse('/home/lilia/beebiome/beebiome-update/data/Apoidea/Apoidea_taxonomy.xml')
+def main():
+    import sys, os
+    
+    # LM 03Dec2021, for security set the space to work with the Apoidea folder set as argument
+    # Get the Apoidea folder to process
+    arguments = len(sys.argv) - 1
+    if arguments == 0:
+        print("Error, no argumet provided. Run this program with the full path to the Apoidea folder as argument.")
+        exit()
+    dnIn = sys.argv[1]
+    dnIn = os.path.normpath(dnIn)
+    print("Selected folder to process: " + dnIn)
+    
+    # Set the working directory
+    dnWork = os.getcwd() #os.path.basename(os.getcwd())  
+    dn, dName  = os.path.split(dnWork)
+
+    # Set the output folder
+    dnOut = dnIn + '\\xml_parse_output_CSVs\\'
+    if not os.path.exists(dnOut):
+        os.makedirs(dnOut)
+
+    apoidea_taxonomy_tree = ET.parse(dnIn + '\\Apoidea_taxonomy.xml')
     apoidea_taxonomy_root = apoidea_taxonomy_tree.getroot()
     apoidea_genera = []
     apoidea_taxonomy_dict = makeTaxonomyDict(apoidea_taxonomy_root, apoidea_genera)
-    host_subs = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/host_subs.csv', header=None, index_col=0, squeeze=True).to_dict()
-    #print(apoidea_taxonomy_dict)
+    host_subs = pd.read_csv(dnWork + '\\host_subs.csv', header=None, index_col=0, squeeze=True).to_dict()
+    #print(apoidea_taxonomy_dict) 
     #print(checkApoidea(apoidea_taxonomy_dict, "Sudila"))
-    beta_data = pd.read_csv(r'/home/lilia/beebiome-taxonomy-scripts/in-beta.csv')
-    auto_no = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/auto-no.csv')
+    beta_data = pd.read_csv(dnWork + '\\in-beta.csv')
+    auto_no = pd.read_csv(dnWork + '\\auto-no.csv')
     auto_no = [str(x) for x in auto_no['autoNo if host in'].tolist()]
     auto_no = [x.casefold() for x in auto_no]
     auto_no = "(" + ")|(".join(auto_no) + ")"
+
     #print(auto_no)
-    for f_name in os.listdir('/home/lilia/beebiome/beebiome-update/data/Apoidea/'):
-        #and (not f_name.startswith('Apoidea_biosample.2.'))
+    for f_name in os.listdir(dnIn):
+        #and (not f_name.startswith('Apoidea_biosample.1.'))
         if (f_name.startswith('Apoidea_biosample.')):
+            #print(f_name)
             print(f_name + '.csv is being processed...')
-            data = parseXML('/home/lilia/beebiome/beebiome-update/data/Apoidea/' + f_name, apoidea_taxonomy_dict, beta_data, auto_no, host_subs, apoidea_genera)
+            data = parseXML(dnIn + '\\' + f_name, apoidea_taxonomy_dict, beta_data, auto_no, host_subs, apoidea_genera)
             f_name = f_name.replace('.', '_')
-            savetoCSV(data, '/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run21June2021/' + f_name + '.csv')
-            df = pd.read_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run21June2021/'+ f_name + '.csv')
+            savetoCSV(data, dnOut + f_name + '.csv')
+            df = pd.read_csv(dnOut + f_name + '.csv')
             new_df = df.reindex(columns=['host', 'taxid', 'in_beta', 'load', 'has_sra', 'has_proj', 'access', 'pub_date', 'last_update', 'sub_date', 'id', 'accession', 
             'ids', 'description', 'owner', 'models', 'package', 'attributes', 'links', 'status'])
-            new_df.to_csv(r'/home/lilia/beebiome/beebiome-scripts/xml_parse_output_run21June2021/'+ f_name + '.csv', index=False)
-            pd.DataFrame.from_dict(data=host_subs, orient='index').to_csv(r'/home/lilia/beebiome-taxonomy-scripts/host_subs.csv', header=False)
+            new_df.to_csv(dnOut + f_name + '.csv', index=False)
+            pd.DataFrame.from_dict(data=host_subs, orient='index').to_csv(dnWork + 'host_subs.csv', header=False)
 
 if __name__ == "__main__":
     # calling main function
