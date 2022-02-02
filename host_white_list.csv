@@ -1,4 +1,4 @@
-host,processingScript,taxid,scientificName,genera
+﻿host,processingScript,taxid,scientificName,genera
 Agapostemon sp.,Found inexact match,88590,Agapostemon,genus
 Anthophora sp.,Found inexact match,60896,Anthophora,genus
 Apis mellifera,7460,7460,Apis mellifera,species
@@ -59,11 +59,11 @@ Honey bee 8,Found inexact match,7460,Apis mellifera,species
 Honey bee 9,Found inexact match,7460,Apis mellifera,species
 honey bee colony,Found inexact match,7460,Apis mellifera,species
 Lasioglossum,88467,88467,Lasioglossum,genus
-Lasioglossum apopkense,Found inexact match,,?,
-Lasioglossum leviense,Found inexact match,,?,
-Lasioglossum viridatum,Found inexact match,,?,
-Lithurgus sp. (gibbosus),Found inexact match,,?,
-Lithurgus sp. (littoralis),Found inexact match,,?,
+Lasioglossum apopkense,Found inexact match,88467,Lasioglossum,genus
+Lasioglossum leviense,Found inexact match,88467,Lasioglossum,genus
+Lasioglossum viridatum,Found inexact match,88467,Lasioglossum,genus
+Lithurgus sp. (gibbosus),Found inexact match,253705,Lithurgus,genus
+Lithurgus sp. (littoralis),Found inexact match,253705,Lithurgus,genus
 Megachile rotundata,143995,143995,Megachile rotundata,species
 Megachile sp.,Found inexact match,132116,Megachile,genus
 Megachile sp. (leafcutter bee),Found inexact match,124286,Megachilidae,family
@@ -72,6 +72,9 @@ Melipona sp.,Found inexact match,28651,Melipona,genus
 Nomia,178049,178049,Nomia,genus
 Osmia sp.,Found inexact match,124287,Osmia,genus
 Osmia sp. (mason bee),Found inexact match,124287,Osmia,genus
+Osmia bicornis,Found inexact match,1437190,Osmia bicornis,species
+Osmia caerulescens,Found inexact match,586934,Osmia caerulescens,species
+Chelostoma florisomne,Found inexact match,549056,Chelostoma florisomne,species
 queen bee 1,Found inexact match,7460,Apis mellifera,species
 queen bee 2,Found inexact match,7460,Apis mellifera,species
 queen bee 3,Found inexact match,7460,Apis mellifera,species
@@ -79,6 +82,15 @@ solitary bees,Found inexact match,7460,Apis mellifera,species
 Triepeolus sp.,Found inexact match,156367,Triepeolus,genus
 Trigona silvestriana or Scaptotrigona subobscuripennis?,Found inexact match,478163,Trigona silvestriana,species
 Trigona sp.,Found inexact match,28657,Trigona,genus
+Trigona ferricauda,Found inexact match,28657,Trigona,genus
+Scaura argyrea,Found inexact match,166437,Scaura,genus
 Western honey bee,7460,7460,Apis mellifera,species
 Xylocopa,7476,7476,Xylocopa,genus
+Dactylurina sp.,60899,60899,Dactylurina,genus
+Hylaeus,232804,232804,Hylaeus,genus
+Meliponula sp.,239132,239132,Meliponula,genus
+Hypotrigona sp.,166417,166417,Hypotrigona,genus
+Liotrigona sp.,398116,398116,Liotrigona,genus
+Scaptotrigona sp.,28655,28655,Scaptotrigona,genus
+Tetragonisca buchwaldi,166441,166441,Tetragonisca,genus
 yellow faced bee,Found inexact match,7460,Apis mellifera,species
