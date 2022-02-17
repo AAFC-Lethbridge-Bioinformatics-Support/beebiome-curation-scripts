@@ -1,6 +1,8 @@
 ﻿host,processingScript,taxid,scientificName,genera
 Agapostemon sp.,Found inexact match,88590,Agapostemon,genus
 Anthophora sp.,Found inexact match,60896,Anthophora,genus
+Hymenoptera: Apidae,None,7458,Apidae,family
+Apis mellifera scutellata x spp.,None,212527,Apis mellifera scutellata,subspecies
 Apis mellifera,7460,7460,Apis mellifera,species
 Apis mellifera (honeybee),Found inexact match,7460,Apis mellifera,species
 Apis mellifera cerana,7461,7461,Apis cerana,species
