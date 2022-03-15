@@ -1,18 +1,22 @@
 ﻿host,taxid,scientificName,genera
 Agapostemon sp.,88590,Agapostemon,genus
 Anthophora sp.,60896,Anthophora,genus
-Hymenoptera: Apidae,7458,Apidae,family
-Apis mellifera scutellata x spp.,212527,Apis mellifera scutellata,subspecies
+Apis cerana,7461,Apis cerana,species
+Apis cerana cerana,94128,Apis cerana cerana,supspecies
+Apis dorsata,7462,Apis dorsata,species
 Apis mellifera,7460,Apis mellifera,species
 Apis mellifera (honeybee),7460,Apis mellifera,species
-Apis cerana,7461,Apis cerana,species
 Apis mellifera cerana,7461,Apis cerana,species
+Apis mellifera jemenitica,346611,Apis mellifera jemenitica,subspecies
 Apis mellifera mellifera,44477,Apis mellifera mellifera,subspecies
+Apis mellifera scutellata x spp.,212527,Apis mellifera scutellata,subspecies
 Augochlorella sp.,178017,Augochlorella,genus
 Bee1,7460,Apis mellifera,species
 Bee2,7460,Apis mellifera,species
 Bee3,7460,Apis mellifera,species
 Bombus,28641,Bombus,genus
+Bombus impatiens,132113,Bombus impatiens,species
+Bombus vosnesenskii,207650,Bombus vosnesenskii,species
 carpenter bee 1,78170,Xylocopinae,subfamily
 carpenter bee 10,78170,Xylocopinae,subfamily
 carpenter bee 11,78170,Xylocopinae,subfamily
@@ -32,40 +36,45 @@ carpenter bee 7,78170,Xylocopinae,subfamily
 carpenter bee 8,78170,Xylocopinae,subfamily
 carpenter bee 9,78170,Xylocopinae,subfamily
 Ceratina,78173,Ceratina,genus
+Chelostoma florisomne,549056,Chelostoma florisomne,species
+Dactylurina sp.,60899,Dactylurina,genus
 Dialictus sp.,88475,Dialictus,subgenus
 Halictus,77574,Halictus,genus
-Honey bee,7460,Apis mellifera,species
 honey bee,7460,Apis mellifera,species
 honey bee (Apis mellifera),7460,Apis mellifera,species
 Honey bee 1,7460,Apis mellifera,species
-Honey bee 10,7460,Apis mellifera,species
+honey bee 10,7460,Apis mellifera,species
 Honey bee 11,7460,Apis mellifera,species
-Honey bee 12,7460,Apis mellifera,species
-Honey bee 13,7460,Apis mellifera,species
+honey bee 12,7460,Apis mellifera,species
+honey bee 13,7460,Apis mellifera,species
 Honey bee 14,7460,Apis mellifera,species
 Honey bee 15,7460,Apis mellifera,species
-Honey bee 16,7460,Apis mellifera,species
-Honey bee 17,7460,Apis mellifera,species
+honey bee 16,7460,Apis mellifera,species
+honey bee 17,7460,Apis mellifera,species
 Honey bee 18,7460,Apis mellifera,species
 Honey bee 19,7460,Apis mellifera,species
-Honey bee 2,7460,Apis mellifera,species
+honey bee 2,7460,Apis mellifera,species
 Honey bee 20,7460,Apis mellifera,species
 Honey bee 21,7460,Apis mellifera,species
 Honey bee 22,7460,Apis mellifera,species
 Honey bee 23,7460,Apis mellifera,species
 Honey bee 24,7460,Apis mellifera,species
-Honey bee 3,7460,Apis mellifera,species
-Honey bee 4,7460,Apis mellifera,species
-Honey bee 5,7460,Apis mellifera,species
+honey bee 3,7460,Apis mellifera,species
+honey bee 4,7460,Apis mellifera,species
+honey bee 5,7460,Apis mellifera,species
 Honey bee 6,7460,Apis mellifera,species
 Honey bee 7,7460,Apis mellifera,species
 Honey bee 8,7460,Apis mellifera,species
 Honey bee 9,7460,Apis mellifera,species
 honey bee colony,7460,Apis mellifera,species
+Hylaeus,232804,Hylaeus,genus
+Hymenoptera: Apidae,7458,Apidae,family
+Hypotrigona sp.,166417,Hypotrigona,genus
 Lasioglossum,88467,Lasioglossum,genus
 Lasioglossum apopkense,88467,Lasioglossum,genus
 Lasioglossum leviense,88467,Lasioglossum,genus
 Lasioglossum viridatum,88467,Lasioglossum,genus
+Liotrigona sp.,398116,Liotrigona,genus
 Lithurgus sp. (gibbosus),253705,Lithurgus,genus
 Lithurgus sp. (littoralis),253705,Lithurgus,genus
 Megachile rotundata,143995,Megachile rotundata,species
@@ -73,59 +82,25 @@ Megachile sp.,132116,Megachile,genus
 Megachile sp. (leafcutter bee),124286,Megachilidae,family
 Megachile sp. (policaris),1732052,Megachile policaris,species
 Melipona sp.,28651,Melipona,genus
+Meliponula sp.,239132,Meliponula,genus
 Nomia,178049,Nomia,genus
-Osmia sp.,124287,Osmia,genus
-Osmia sp. (mason bee),124287,Osmia,genus
 Osmia bicornis,1437190,Osmia bicornis,species
 Osmia caerulescens,586934,Osmia caerulescens,species
-Chelostoma florisomne,549056,Chelostoma florisomne,species
+Osmia sp.,124287,Osmia,genus
+Osmia sp. (mason bee),124287,Osmia,genus
+Paratrigona opaca,166430,Paratrigona,genus
 queen bee 1,7460,Apis mellifera,species
 queen bee 2,7460,Apis mellifera,species
 queen bee 3,7460,Apis mellifera,species
+Scaptotrigona sp.,28655,Scaptotrigona,genus
+Scaptotrigona wheeleri,28655,Scaptotrigona,genus
+Scaura argyrea,166437,Scaura,genus
 solitary bees,7460,Apis mellifera,species
+Tetragonisca buchwaldi,166441,Tetragonisca,genus
 Triepeolus sp.,156367,Triepeolus,genus
+Trigona ferricauda,28657,Trigona,genus
 Trigona silvestriana or Scaptotrigona subobscuripennis?,478163,Trigona silvestriana,species
 Trigona sp.,28657,Trigona,genus
-Trigona ferricauda,28657,Trigona,genus
-Scaura argyrea,166437,Scaura,genus
 Western honey bee,7460,Apis mellifera,species
 Xylocopa,7476,Xylocopa,genus
-Dactylurina sp.,60899,Dactylurina,genus
-Hylaeus,232804,Hylaeus,genus
-Meliponula sp.,239132,Meliponula,genus
-Hypotrigona sp.,166417,Hypotrigona,genus
-Liotrigona sp.,398116,Liotrigona,genus
-Scaptotrigona sp.,28655,Scaptotrigona,genus
-Tetragonisca buchwaldi,166441,Tetragonisca,genus
 yellow faced bee,7460,Apis mellifera,species
-Apis dorsata,7462,Apis dorsata,species
-Apis mellifera jemenitica,346611,Apis mellifera jemenitica,subspecies
-Apis cerana cerana,94128,Apis cerana cerana,supspecies
-apis malifera,7460,Apis mellifera,species
-Bombus vosnesenskii,207650,Bombus vosnesenskii,species
-Bombus impatiens,132113,Bombus impatiens,species
-honey bee 1,7460,Apis mellifera,species
-honey bee 2,7460,Apis mellifera,species
-honey bee 3,7460,Apis mellifera,species
-honey bee 4,7460,Apis mellifera,species
-honey bee 5,7460,Apis mellifera,species
-honey bee 6,7460,Apis mellifera,species
-honey bee 7,7460,Apis mellifera,species
-honey bee 8,7460,Apis mellifera,species
-honey bee 9,7460,Apis mellifera,species
-honey bee 10,7460,Apis mellifera,species
-honey bee 11,7460,Apis mellifera,species
-honey bee 12,7460,Apis mellifera,species
-honey bee 13,7460,Apis mellifera,species
-honey bee 14,7460,Apis mellifera,species
-honey bee 15,7460,Apis mellifera,species
-honey bee 16,7460,Apis mellifera,species
-honey bee 17,7460,Apis mellifera,species
-honey bee 18,7460,Apis mellifera,species
-honey bee 19,7460,Apis mellifera,species
-honey bee 20,7460,Apis mellifera,species
-honey bee 21,7460,Apis mellifera,species
-honey bee 22,7460,Apis mellifera,species
-honey bee 23,7460,Apis mellifera,species
-honey bee 24,7460,Apis mellifera,species
-Paratrigona opaca,166430,Paratrigona,genus
